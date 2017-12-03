@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "starGetter",
+  "version": "0.1",
+  "description": "( ´ ▽ ` )☆",
+  "icons": {
+    "16": "star_16.png",
+    "128": "star_128.png"
+  },
+  "browser_action": {
+    "default_title": "Star Getter",
+    "default_icon": "star_16.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-2.1.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions":[
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
