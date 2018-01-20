@@ -18,7 +18,7 @@ function sendTwitter(tab){
         chrome.tabs.executeScript(tab.id, {code: "document.getElementById('icon-room-twitter-post').click();"}, null);
         chrome.tabs.executeScript(tab.id, {code: "document.getElementById('twitter-post-button').click();"}, null);
         console.log(tab.id + " posted");
-        setTimeout(() => { chrome.tabs.remove(tab.id) }, 10000);
+        //setTimeout(() => { chrome.tabs.remove(tab.id) }, 20000);
      }, 50000);
 }
 
@@ -26,7 +26,7 @@ function sendTwitter(tab){
 function sendTwitter2(tab){
     chrome.tabs.executeScript(tab.id, {code: "document.getElementById('twitter-post-button').click();"}, null);
     console.log(tab.id + " posted");
-    setTimeout(() => { chrome.tabs.remove(tab.id) }, 10000);
+    setTimeout(() => { chrome.tabs.remove(tab.id) }, 20000);
 }
 
 //スリープタイム

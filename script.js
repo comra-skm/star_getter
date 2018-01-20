@@ -7,11 +7,13 @@ if(tabLimit == null){ exit; }
 if(skipCount == null){ exit; }
 
 domain = "https://www.showroom-live.com/";
-i = 0;
+i = 0
 $.each($('.js-room-link' + '.listcard-join-btn'), function(index, val) {
-    //if (i > 0) { sleep(3000);}
     // limitまで達したらbreak
-    if(i + skipCount == tabLimit + skipCount){ return false; }
+    if(i > tabLimit - 1){ return false; }
+    console.log(val)
+    if(index < skipCount){ return true; }
+
     //ルーム名の取得
     var roomName = val.getAttribute('href').slice(1);
     console.log(roomName);
@@ -22,22 +24,9 @@ $.each($('.js-room-link' + '.listcard-join-btn'), function(index, val) {
     }
     if(roomName.match(re)){
         // メッセージ送信する
-        if (i >= skipCount){
-            console.log(domain + roomName);
-            chrome.runtime.sendMessage(domain + roomName);
-            i++;
-        }
-
+        console.log(domain + roomName);
+        chrome.runtime.sendMessage(domain + roomName);
+        i++;
     }
     console.log(i);
 });
-
-//スリープタイム
-function sleep(time) {
-	var d1 = new Date().getTime();
-	var d2 = new Date().getTime();
-	while (d2 < d1 + time) {
-		d2 = new Date().getTime();
-	}
-	return;
-}
