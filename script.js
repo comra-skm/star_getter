@@ -6,27 +6,41 @@ categoryList = $('#js-categorymenu-list').children();
 if(tabLimit == null){ exit; }
 if(skipCount == null){ exit; }
 
-domain = "https://www.showroom-live.com/";
+//初期値の設定
+domain = "https://www.showroom-live.com";
 i = 0
-$.each($('.js-room-link' + '.listcard-join-btn'), function(index, val) {
+
+//オフィシャルカテゴリ判定
+officialCategory = true
+if (categoryList[7].className == 'is-active') {
+    officialCategory = false
+}
+
+$('.listcard').each(function(index, val) {
     // limitまで達したらbreak
     if(i > tabLimit - 1){ return false; }
-    console.log(val)
+    
+    //スキップ判定
     if(index < skipCount){ return true; }
-
+    
+    //roomIdの取得
+    var roomId = val.getAttribute('data-roomid')
+    var target = $('.js-liveroom-' + roomId)
+    
     //ルーム名の取得
-    var roomName = val.getAttribute('href').slice(1);
-    console.log(roomName);
-    //アマチュア判定
-    re = /[^0-9a-f]/
-    if (categoryList[7].className == 'is-active') {
-        re = /[0-9a-f]/
+    var roomName = target.find('.js-room-link' + '.listcard-join-btn')[0].getAttribute('href');
+    console.log(roomName)
+
+    //公式配信者判定
+    officialUser = false
+    if (target.find('.svg' + '.icon-official').size()){
+        officialUser = true
     }
-    if(roomName.match(re)){
-        // メッセージ送信する
+    
+    if ( officialCategory == officialUser ){
+         // メッセージ送信する
         console.log(domain + roomName);
         chrome.runtime.sendMessage(domain + roomName);
         i++;
     }
-    console.log(i);
 });
