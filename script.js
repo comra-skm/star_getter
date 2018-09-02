@@ -12,7 +12,7 @@ i = 0
 
 //オフィシャルカテゴリ判定
 officialCategory = true
-if (categoryList[8].className == 'is-active') {
+if (categoryList[7].className == 'is-active') {
     officialCategory = false
 }
 
